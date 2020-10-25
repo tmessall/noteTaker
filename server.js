@@ -6,11 +6,11 @@ const app = express();
 const PORT =  process.env.PORT || 3000;
 
 function displayNotes(res) {
-    res.sendFile(path.join(__dirname,'','./../public/notes.html'));
+    res.json(path.join(__dirname,'','./../public/notes.html'));
 }
 
 function displayIndex(res) {
-    res.sendFile(path.join(__dirname,'',"./../public/index.html"));
+    res.json(path.join(__dirname,'',"./../public/index.html"));
 }
 
 // Routes
