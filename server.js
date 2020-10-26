@@ -30,9 +30,14 @@ app.get("/api/notes", (req, res) => {
     res.json(notes);
 });
 
-// app.post("/api/notes", (req, res) => {
-    
-// })
+app.post("/api/notes", (req, res) => {
+    let notesArr = [...notes];
+    notesArr.push(req.body);
+    asyncWriteFile("./db/db.json", JSON.stringify(notesArr)).then(err => {
+        if (err) console.log("There was an error.");
+        else res.json(notes);
+    })
+})
 
 app.get("*", (req, res) => {
     displayIndex(res);
