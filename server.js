@@ -34,8 +34,8 @@ app.post("/api/notes", (req, res) => {
     let notesArr = [...notes];
     notesArr.push(req.body);
     asyncWriteFile("./db/db.json", JSON.stringify(notesArr)).then(err => {
-        if (err) console.log("There was an error.");
-        else res.json(notes);
+        if (err) console.log(err);
+        res.end();
     })
 })
 
