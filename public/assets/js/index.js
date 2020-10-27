@@ -66,12 +66,12 @@ const handleNoteSave = function () {
 const handleNoteDelete = function (event) {
   // prevents the click listener for the list from being called when the button inside of it is clicked
   event.stopPropagation();
-
   const note = $(this).parent(".list-group-item").data();
-
+  
   if (activeNote.id === note.id) {
     activeNote = {};
   }
+  console.log("im deletin " + note.id);
 
   deleteNote(note.id).then(() => {
     getAndRenderNotes();
