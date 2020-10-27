@@ -37,8 +37,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
     let notesArr = [...notes];
     notesArr.push(req.body);
-    notesArr[notes.length - 1].id = notesArr.length - 1;
-    console.log(notesArr[notesArr.length-1])
+    notesArr[notesArr.length - 1].id = notesArr.length - 1;
     asyncWriteFile("./db/db.json", JSON.stringify(notesArr)).then(err => {
         if (err) console.log(err);
         res.end();

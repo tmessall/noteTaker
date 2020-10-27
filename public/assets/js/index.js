@@ -35,7 +35,7 @@ const deleteNote = (id) => {
 // If there is an activeNote, display it, otherwise render empty inputs
 const renderActiveNote = () => {
   $saveNoteBtn.hide();
-
+  
   if (activeNote.id) {
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
@@ -51,14 +51,18 @@ const renderActiveNote = () => {
 
 // Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = function () {
+  $saveNoteBtn.hide();
   const newNote = {
     title: $noteTitle.val(),
     text: $noteText.val(),
   };
 
   saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+    const wait = setInterval(function() {
+      getAndRenderNotes();
+      renderActiveNote();
+      clearInterval(wait);
+    }, 500);
   });
 };
 
@@ -71,11 +75,13 @@ const handleNoteDelete = function (event) {
   if (activeNote.id === note.id) {
     activeNote = {};
   }
-  console.log("im deletin " + note.id);
 
   deleteNote(note.id).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+    const wait = setInterval(function() {
+      getAndRenderNotes();
+      renderActiveNote();
+      clearInterval(wait);
+    }, 500);
   });
 };
 
